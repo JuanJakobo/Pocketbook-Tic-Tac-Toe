@@ -1,6 +1,6 @@
 # Pocketbook Tic-Tac-Toe
 
-A simple TikTakToe Applikation for the Pocketbook I made to start learning C++ and understand the SDK of Pocketbook. (https://github.com/pocketbook-free/sdkrelease_1_1a)
+A simple TikTakToe Applikation for Pocketbook, I created to start learning C++ and understand the SDK of Pocketbook. (https://github.com/pocketbook-free/sdkrelease_1_1a)
 
 
 ### Tested on
