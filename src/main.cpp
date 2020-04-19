@@ -1,34 +1,47 @@
+//------------------------------------------------------------------
+// main.h
+//
+// Author:           JuanJakobo          
+// Date:             19.4.2020
+// Description:      sets the inkview main handler   
+//-------------------------------------------------------------------
+
 #include "inkview.h"
+#include "eventHandler.h"
 
+/**
+* Handles events and redirects them
+* 
+* @param type event type
+* @param par1 first argument of the event
+* @param par2 second argument of the event
+* @return int returns if the event was handled
+*/
+int Inkview_handler(int type, int par1, int par2){
+    
 
-void LoadGame(){
-    //Writes a simple Hello World String on the screen
+    EventHandler* events = 0;
 
-    char text[]="Hello World!";
-    ifont* font = OpenFont("LiberationMono",40,1);
-    SetFont(font, BLACK);
-    DrawString(0,0,text);    
-    FullUpdate();
+    if(type==EVT_INIT)
+    {
+        events = new EventHandler();
+        return 1;
 
-}
-
-
-int inkview_handler(int type, int par1, int par2){
-    // main handler of the view, that reacts depending on the event that happend
-
-    if(type==EVT_INIT){
-    //Start of the program
-        LoadGame();
-        
+    }else if(type==EVT_EXIT)
+    {
+        delete(events);
         return 1;
     }
 
     return 0;
 }
 
-int main(){
-    //Start of the program
 
-    InkViewMain(inkview_handler);
+int main(){
+
+    OpenScreen();
+	SetOrientation(0);
+
+    InkViewMain(Inkview_handler);
     return 0;
 }
