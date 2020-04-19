@@ -3,7 +3,7 @@
 #
 
 PROJECT (Pocketbook-Tic-Tac-Toe)
-CMAKE_MINIMUM_REQUIRED (VERSION 2.6.0)
+CMAKE_MINIMUM_REQUIRED (VERSION 3.17.1)
 
 IF (NOT PLATFORM)
 	SET (PLATFORM FC)
@@ -40,7 +40,9 @@ IF (TARGET_TYPE STREQUAL "ARM")
 	SET (CMAKE_STRIP ${CMAKE_CURRENT_SOURCE_DIR}/${TOOLCHAIN_PATH}/bin/${TOOLCHAIN_PREFIX}-strip)
 
 	SET (TARGET_INCLUDE "")
+
 	SET (TARGET_LIB pthread inkview freetype z)
+
 ELSE()
 	SET(CMAKE_INSTALL_PREFIX "${TOOLCHAIN_PATH}" CACHE PATH "Install path prefix" FORCE)
 
@@ -97,18 +99,28 @@ ELSE ()
 
 ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 
+
+
+#necessary?
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-SET (SRC_LIST
-	${CMAKE_SOURCE_DIR}/src/main.cpp
-	)
+set(SOURCES ${CMAKE_SOURCE_DIR}/src/main.cpp 
+			${CMAKE_SOURCE_DIR}/src/handler/eventHandler.cpp 
+			${CMAKE_SOURCE_DIR}/src/handler/menuHandler.cpp 			
+			${CMAKE_SOURCE_DIR}/src/ui/game.cpp 
+			${CMAKE_SOURCE_DIR}/src/ui/field.cpp 
 
-ADD_EXECUTABLE (TicTacToe.app
-		${SRC_LIST})
+ )
 
+add_executable(TicTacToe.app ${SOURCES})
 
-INCLUDE_DIRECTORIES(${TARGET_INCLUDE})
+include_directories(
+	$(TARGET_INCLUDE)
+    ${CMAKE_SOURCE_DIR}/src/handler/
+	${CMAKE_SOURCE_DIR}/src/ui/
+)
+
 TARGET_LINK_LIBRARIES (TicTacToe.app ${TARGET_LIB})
 
-INSTALL (TARGETS TicTacToe.app RUNTIME DESTINATION bin)
+INSTALL (TARGETS TicTacToe.app)
 
