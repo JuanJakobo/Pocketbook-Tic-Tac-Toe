@@ -13,18 +13,13 @@ class Field {
     public:
 
         /**
-        * TODO:
+        * Creates a new field which is definied by its measurements
+        * @param startX horizontal start coordinate of the field
+        * @param startY vertical start coordinate of the field
+        * @param width  width of the field beginning at start point
+        * @param height height of the field beginning at start point
         */
         Field(int startX,int startY,int width,int height);
-
-        //TODO: use bool operator==(Rect &rec);
-        /**
-        * TODO:
-        * 
-        * @param re 
-        * @return bool
-        */
-        bool compareContent(Field &re);
 
         /**
         * Setter for content
@@ -42,14 +37,24 @@ class Field {
         char* getContent();
 
         /**
-        * TODO:
+        * Compares the content of two fields
+        * 
+        * @param f argument of class field
+        * @return bool returns true if the content of both field is the same
+        */
+        bool operator==(const Field& f);
+
+
+
+        /**
+        * Draws a reactangle on the screen  
         * 
         * @return void
         */
         void drawField();
         
         /**
-        * TODO:
+        * Updates the screenarea of the field
         * 
         * @return void
         */
@@ -66,7 +71,7 @@ class Field {
         bool pointInsideField(int x, int y);
 
         /**
-        * TODO:
+        * Checks if a field contains a letter or not. 
         * 
         * @return bool true if the field has content
         */

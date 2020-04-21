@@ -31,6 +31,7 @@ class EventHandler {
         static EventHandler *eventHandlerStatic;
         Game *game;
         MenuHandler *menu;
+        char *result;
  
 
         /**

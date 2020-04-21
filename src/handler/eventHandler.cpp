@@ -17,17 +17,9 @@ EventHandler * EventHandler::eventHandlerStatic;
 EventHandler::EventHandler()
 {
 
-        //TODO: Get Language from config
-        //TODO: Define fonts once and global 
-        ifont* font = OpenFont("LiberationMono",40,1);
-        SetFont(font, BLACK);
-
         //Sets eventDistributor as global EventHandler
         eventHandlerStatic = this;
         SetEventHandler(EventHandler::eventDistributorStatic);
-
-        //TODO:  possibility to set panel inactive
-        //void SetPanelType(int type);
 
         //Start new Content
         startNewGame();
@@ -39,6 +31,7 @@ EventHandler::~EventHandler()
 {
         delete(game);
         delete(menu);
+        delete(eventHandlerStatic);
 }
 
 
@@ -50,6 +43,7 @@ void EventHandler::startNewGame()
     {
         delete(game);
         delete(menu);
+        result = NULL;
     }
 
     menu = new MenuHandler();
@@ -71,15 +65,7 @@ int EventHandler::eventDistributor(int type, int par1, int par2)
 {
 
     if (ISPOINTEREVENT(type))
-    {
 		return EventHandler::pointerHandler(type,par1,par2);
-
-    //TODO: define key events
-	}else if (ISKEYEVENT(type))
-    {
-        return 0;
-    }
-    //TODO: Logger
 
     return 0;
 
@@ -87,35 +73,33 @@ int EventHandler::eventDistributor(int type, int par1, int par2)
 
 int EventHandler::pointerHandler(int type, int par1, int par2)
 {
-
-    switch (type)
+    if(type==EVT_POINTERDOWN)
     {
-    case EVT_POINTERDOWN:
-
-       //TODO: only if is content area and not menu!
-        if(game->checkFields(par1,par2))
+        if(game->doMove(par1,par2))
         {
-            //TODO: Move this part
-            if(game->getMove()>4){
-                if(game->checkForWinner()){
-                    //TODO: Who has won?
-                    Dialog(2,"Result","Somebody has won.","New game","Close",EventHandler::DialogHandlerStatic);
-                }else if(game->gameOver()){
-                    Dialog(2,"Result","Nobody has won.","New game","Close",EventHandler::DialogHandlerStatic);
+            if(game->getMove()>4)
+            {
+
+                if(game->checkForWinner())
+                {
+                    result = "Somebody has won.";
+                }else if(game->gameOver())
+                {
+                    result = "Nobdoy has won.";
                 }
 
-            }
-            return 1;
-        }
-        //TODO: Define other pointer events
+                if(result != NULL)
+                {
+                    Dialog(2,"Result",result,"New game","Close",EventHandler::DialogHandlerStatic);
+                }
 
-        return 0;
-    default:
-        //TODO: Logger
-        return 0;
+                return 1;
+            }
+        }
+
     }
 
-    return 1;
+    return 0;
 
 }
 

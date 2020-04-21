@@ -29,7 +29,7 @@ void Game::drawBoard(int boardBeginX, int boardBeginY, int boardWidh, int boardH
         yFieldCount = 3;
         xFieldCount = 3;
 
-        int fieldHeight = boardHeight / yFieldCount;
+        fieldHeight = boardHeight / yFieldCount;
         int fieldWidth = boardWidh / xFieldCount;
         int fieldBeginY;
         
@@ -56,44 +56,29 @@ void Game::drawBoard(int boardBeginX, int boardBeginY, int boardWidh, int boardH
         }
 }
 
-bool Game::checkFields(int x, int y){
+bool Game::doMove(int x, int y){
 
-
-        //TODO: font size depending on field size
-        ifont* font = OpenFont("LiberationMono",200,1);
+        ifont* font = OpenFont("LiberationMono",fieldHeight/2,1);
         SetFont(font, BLACK);
 
         for (unsigned int i = 0; i < boardfields.size(); i++)
         {
                 if(boardfields[i].pointInsideField(x,y))
                 {
-                        if(boardfields[i].containsContent()){
-                                //TODO: select correct bitmap id
-                                Message(1,"Error","This move is not possible",100);
+                        if(boardfields[i].containsContent()){                                
+                                Message(2,"Information","This move is not possible.",1000);
                                 return false;
                         }else{
-                                //TODO: move 
-                                doMove(i);
+                                boardfields[i].setContent(whosTurn());
+                                boardfields[i].updateFieldArea();
+                                move++;
                                 return true;
                         }
                 }
         }
-
         return false;
-        
-
 }
 
-void Game::doMove(int fieldID)
-{
-        boardfields[fieldID].setContent(whosTurn());
-
-        move++;
-        //TODO: draw on screen whos turn it is
-
-        boardfields[fieldID].updateFieldArea();
-
-}
 
 char *Game::whosTurn(){
         if(move%2==0)
@@ -111,42 +96,42 @@ bool Game::gameOver(){
 bool Game::checkForWinner(){
 
         //Row 1
-        if(boardfields[0].containsContent() && boardfields[0].compareContent(boardfields[1]) && boardfields[1].compareContent(boardfields[2]))
+        if(boardfields[0].containsContent() && boardfields[0] == boardfields[1] && boardfields[1] == boardfields[2])
         {
             return true;
         }  
         //row 2
-        else if(boardfields[3].containsContent() && boardfields[3].compareContent(boardfields[4]) && boardfields[4].compareContent(boardfields[5]))
+        else if(boardfields[3].containsContent() && boardfields[3] == boardfields[4] && boardfields[4] == boardfields[5])
         {
             return true;   
         }
         //Row 3
-        else if(boardfields[6].containsContent() && boardfields[6].compareContent(boardfields[7]) && boardfields[7].compareContent(boardfields[8]))
+        else if(boardfields[6].containsContent() && boardfields[6] == boardfields[7] && boardfields[7] == boardfields[8])
         {
             return true;   
         }
         //Column 1
-        else if(boardfields[0].containsContent() && boardfields[0].compareContent(boardfields[3]) && boardfields[3].compareContent(boardfields[6]))
+        else if(boardfields[0].containsContent() && boardfields[0] == boardfields[3] && boardfields[3] == boardfields[6])
         {
             return true;   
         }
         //Column 2
-        else if(boardfields[1].containsContent() && boardfields[1].compareContent(boardfields[4]) && boardfields[4].compareContent(boardfields[7]))
+        else if(boardfields[1].containsContent() && boardfields[1] == boardfields[4] && boardfields[4] == boardfields[7])
         { 
             return true;   
         }
         //Column 3
-        else if(boardfields[2].containsContent() && boardfields[2].compareContent(boardfields[5]) && boardfields[5].compareContent(boardfields[8]))
+        else if(boardfields[2].containsContent() && boardfields[2] == boardfields[5] && boardfields[5] == boardfields[8])
         {
             return true;   
         }
         //Diagonal 1
-        else if(boardfields[0].containsContent() && boardfields[0].compareContent(boardfields[4]) && boardfields[4].compareContent(boardfields[8]))
+        else if(boardfields[0].containsContent() && boardfields[0] == boardfields[4] && boardfields[4] == boardfields[8])
         {
             return true;   
         }
         //Diagonal 2
-        else if(boardfields[2].containsContent() && boardfields[2].compareContent(boardfields[4]) && boardfields[4].compareContent(boardfields[6]))
+        else if(boardfields[2].containsContent() && boardfields[2] == boardfields[4] && boardfields[4] == boardfields[6])
         { 
             return true;   
         }

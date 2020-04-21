@@ -27,13 +27,6 @@ class MenuHandler {
         */
         void drawPanel();
 
-        /**
-        * handles the menu items
-        * 
-        * @param index menu item index that was clicked
-        */
-        void handleMenu(int index);
-
         int getContentHeight();
         int getContentWidth();
         int getContentBeginX();
@@ -52,14 +45,6 @@ class MenuHandler {
         * @return void
         */
         static void panelHandlerStatic(); 
-
-        /**
-        * sets a menu active
-        * 
-        * @param menu menu that shall be created
-        */
-        void createMenu(imenu menu[]);
-
 
 };
 

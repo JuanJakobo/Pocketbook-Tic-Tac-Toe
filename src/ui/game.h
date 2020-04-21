@@ -39,21 +39,13 @@ class Game {
         void drawBoard(int boardBeginX, int boardBeginY, int boardWidh, int boardHeight);
 
         /**
-        * Iterates throw boardfields array and check which field has been choosen 
+        * Iterates throw boardfields array and paints the move
         * 
         * @param x x coordinate of the point 
         * @param y y coordinate of the point
         * @return bool true if the field is empty
         */
-        bool checkFields(int x, int y);
-
-        /**
-        * Sets the content of a field and updates the rectangle screen area 
-        * 
-        * @param field the number of the field in boardfields
-        * @return void
-        */
-        void doMove(int field);
+        bool doMove(int x, int y);
 
         /**
         * Calculates if it is O or X turn
@@ -84,6 +76,7 @@ class Game {
         int xFieldCount;        
         int fieldsCount;
         int move;
+        int fieldHeight;
 
 };
 
