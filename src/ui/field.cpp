@@ -9,27 +9,28 @@
 
 #include "field.h"
 #include "inkview.h"
-#include <string>
+#include "string"
+
+using namespace std;
 
 Field::Field(int X, int Y, int wid, int hei): startX(X), startY(Y), width(wid), height(hei){};
 
-void Field::setContent(char *con){
+void Field::setContent(string con){
     content = con;
-    DrawTextRect(startX,startY,width,height,content, ALIGN_CENTER);
+    DrawTextRect(startX,startY,width,height,content.c_str(), ALIGN_CENTER);
 }
 
-char *Field::getContent()
+string Field::getContent()
 {
     return content;
-};
+}
 
 
 bool Field::operator==(const Field& f)
 {
-    if(f.content!=NULL && std::strcmp(content,f.content)==0)
+    if(!f.content.empty() && f.content.compare(content)==0)
         return true;
     return false;
-
 }
 
 void Field::drawField(){
@@ -52,12 +53,7 @@ bool Field::pointInsideField(int x, int y)
 
 bool Field::containsContent()
 {
-    if ((content != NULL)) 
-        return true;
-    return false;
+    if (content.empty()) 
+        return false;
+    return true;
 }
-
-
-
-
-

@@ -11,6 +11,7 @@
 #include "field.h"
 
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -24,6 +25,11 @@ int Game::getMove()
         return move;
 }
 
+void Game::nextMove()
+{
+    move++;
+}
+
 void Game::drawBoard(int boardBeginX, int boardBeginY, int boardWidh, int boardHeight)
 {
         yFieldCount = 3;
@@ -35,10 +41,9 @@ void Game::drawBoard(int boardBeginX, int boardBeginY, int boardWidh, int boardH
         
         fieldsCount = yFieldCount * xFieldCount; 
 
-
-        for (int i = 0; i < xFieldCount; i++)
+        for (auto i = 0; i < xFieldCount; i++)
         {       
-                for (int j = 0; j < yFieldCount; j++)
+                for (auto j = 0; j < yFieldCount; j++)
                 {
                         //On the first run the field should start at menuheight
                         if(i == 0)
@@ -61,26 +66,28 @@ bool Game::doMove(int x, int y){
         ifont* font = OpenFont("LiberationMono",fieldHeight/2,1);
         SetFont(font, BLACK);
 
-        for (unsigned int i = 0; i < boardfields.size(); i++)
+        for(auto& field : boardfields)
         {
-                if(boardfields[i].pointInsideField(x,y))
+                if(field.pointInsideField(x,y))
                 {
-                        if(boardfields[i].containsContent()){                                
+                        if(field.containsContent())
+                        {
                                 Message(2,"Information","This move is not possible.",1000);
                                 return false;
-                        }else{
-                                boardfields[i].setContent(whosTurn());
-                                boardfields[i].updateFieldArea();
-                                move++;
-                                return true;
                         }
+
+                        field.setContent(whosTurn());
+                        field.updateFieldArea();
+                        return true;
                 }
+
         }
+        
         return false;
 }
 
 
-char *Game::whosTurn(){
+string Game::whosTurn(){
         if(move%2==0)
                 return  "O";
         return "X";
@@ -88,7 +95,7 @@ char *Game::whosTurn(){
 
 
 bool Game::gameOver(){
-        if(move==fieldsCount)
+        if(move==(fieldsCount-1))
                 return true;
         return false;
 }
@@ -139,4 +146,3 @@ bool Game::checkForWinner(){
         return false;
 
 }
-

@@ -8,9 +8,10 @@
 
 #include "inkview.h"
 #include "menuHandler.h"
+#include <string>
 
 
-MenuHandler::MenuHandler()
+MenuHandler::MenuHandler(std::string name)
 {
 
     menuHeight = 100;
@@ -18,7 +19,7 @@ MenuHandler::MenuHandler()
     ifont* font = OpenFont("LiberationMono-Bold",menuHeight/2,1);
     SetFont(font, BLACK);
 
-    DrawTextRect(0,0,ScreenWidth(),menuHeight,"Tik-Tak-Tok",ALIGN_CENTER);
+    DrawTextRect(0,0,ScreenWidth(),menuHeight,name.c_str(),ALIGN_CENTER);
 
     contentHeight = (ScreenHeight() - PanelHeight() - menuHeight);
     contentWidth  =  ScreenWidth();
@@ -59,4 +60,3 @@ void MenuHandler::panelHandlerStatic()
     DrawPanel(NULL, "", NULL, -1);
     SetHardTimer("PANELUPDATE", panelHandlerStatic, 110000);
 }
-

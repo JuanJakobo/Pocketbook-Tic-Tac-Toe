@@ -9,13 +9,14 @@
 #ifndef MENU_HANDLER
 #define MENU_HANDLER
 
+#include <string>
 
 class MenuHandler {
     public:
         /**
         * Defines fonds, sets global Event Handler and starts new content 
         */
-        MenuHandler();
+        MenuHandler(std::string name);
 
         /**
         * Functions needed to call C function, redirects to real function
@@ -47,7 +48,5 @@ class MenuHandler {
         static void panelHandlerStatic(); 
 
 };
-
-
 
 #endif

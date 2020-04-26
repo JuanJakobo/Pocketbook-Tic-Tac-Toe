@@ -24,14 +24,13 @@ EventHandler::EventHandler()
         //Start new Content
         startNewGame();
 
-
 }
 
 EventHandler::~EventHandler()
 {
-        delete(game);
-        delete(menu);
-        delete(eventHandlerStatic);
+        delete game;
+        delete menu;
+        delete eventHandlerStatic;
 }
 
 
@@ -39,14 +38,16 @@ EventHandler::~EventHandler()
 
 void EventHandler::startNewGame()
 {
-    if(game!=0 && menu !=0)
+
+    if(game!=nullptr && menu!=nullptr)
     {
-        delete(game);
-        delete(menu);
-        result = NULL;
+        //delete game;
+        game=nullptr;
+        menu=nullptr;
+        result.clear();
     }
 
-    menu = new MenuHandler();
+    menu = new MenuHandler("Tik-Tak-Tok");
     menu->drawPanel();
 
     game = new Game();
@@ -77,45 +78,39 @@ int EventHandler::pointerHandler(int type, int par1, int par2)
     {
         if(game->doMove(par1,par2))
         {
-            if(game->getMove()>4)
+            if(game->getMove()>3)
             {
 
                 if(game->checkForWinner())
                 {
-                    result = "Somebody has won.";
-                }else if(game->gameOver())
+                    result = game->whosTurn() + " has won.";
+                }
+                else if(game->gameOver())
                 {
                     result = "Nobdoy has won.";
                 }
 
-                if(result != NULL)
+                if(!result.empty())
                 {
-                    Dialog(2,"Result",result,"New game","Close",EventHandler::DialogHandlerStatic);
-                }
+                    Dialog(2,"Result",result.c_str(),"New game","Close",EventHandler::DialogHandlerStatic);
 
-                return 1;
+                }
             }
+
+            game->nextMove();
+
         }
 
+        return 1;
     }
 
     return 0;
 
 }
 
-
-//
 void EventHandler::DialogHandlerStatic(int Button)
 {
 	Button==1 ? ClearScreen() : CloseApp();
         eventHandlerStatic->startNewGame();
 
 }
-
-
-
-
-
-
-
-

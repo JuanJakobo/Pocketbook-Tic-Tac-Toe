@@ -11,6 +11,9 @@
 
 #include "game.h"
 #include "menuHandler.h"
+#include "string"
+
+using namespace std;
 
 class EventHandler {
     public:
@@ -31,7 +34,7 @@ class EventHandler {
         static EventHandler *eventHandlerStatic;
         Game *game;
         MenuHandler *menu;
-        char *result;
+        string result;
  
 
         /**
@@ -82,8 +85,4 @@ class EventHandler {
 
 };
 
-
-
 #endif
-
-

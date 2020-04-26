@@ -8,6 +8,11 @@
 
 #ifndef FIELD
 #define FIELD
+
+#include "string"
+
+using namespace std;
+
  
 class Field {
     public:
@@ -27,14 +32,14 @@ class Field {
         * @param con content
         * @return void
         */
-        void setContent(char *con);
+        void setContent(string con);
 
         /**
         * Getter for content
         * 
         * @return returns content
         */
-        char* getContent();
+        string getContent();
 
         /**
         * Compares the content of two fields
@@ -82,7 +87,7 @@ class Field {
         int startY;
         int width;
         int height;
-        char *content;
+        string content;
 
 };
 

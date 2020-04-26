@@ -9,8 +9,13 @@
 #ifndef GAME
 #define GAME
 
-#include <vector>
 #include "field.h"
+#include <vector>
+#include <string>
+
+using namespace std;
+
+
  
 class Game {
     public:
@@ -26,6 +31,14 @@ class Game {
         * @return int move 
         */
         int getMove();
+
+        /**
+        * next players move
+        * 
+        * @return void 
+        */
+        void nextMove();
+
 
         /**
         * Draws the game board and filles the boardfiles vector
@@ -50,9 +63,9 @@ class Game {
         /**
         * Calculates if it is O or X turn
         * 
-        * @return char* name of the player 
+        * @return name of the player 
         */
-        char *whosTurn();
+        string whosTurn();
 
 
         /**
@@ -60,7 +73,7 @@ class Game {
         * 
         * @return bool returns true if the move counts equals the fieldscount
         */
-        bool gameOver();
+        bool gameOver();    
 
 
         /**
@@ -70,8 +83,10 @@ class Game {
         */
         bool checkForWinner();
 
+        
+
     private:
-        std::vector<Field> boardfields;
+        vector<Field> boardfields;
         int yFieldCount;
         int xFieldCount;        
         int fieldsCount;
@@ -79,7 +94,5 @@ class Game {
         int fieldHeight;
 
 };
-
-
 
 #endif
