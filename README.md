@@ -10,4 +10,8 @@ A simple TikTakToe Applikation for Pocketbook, I created to start learning C++ a
 ![Screenshot 1](/screenshots/1.bmp#raw "Pocketbook Screenshot")
 
 
+## Disclamer
+
+Use as your own risk! 
+Even though the possibility is really low, the application could harm your device or even break it.
 

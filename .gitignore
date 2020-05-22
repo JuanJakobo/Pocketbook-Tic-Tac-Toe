@@ -11,7 +11,7 @@ CTestTestfile.cmake
 _deps
 
 bin/
-
+build/
 .vscode/*
 *.code-workspace
 
