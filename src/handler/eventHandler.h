@@ -29,6 +29,16 @@ class EventHandler {
         */
         ~EventHandler();
 
+        /**
+        * Handles events and redirects them
+        * 
+        * @param type event type
+        * @param par1 first argument of the event
+        * @param par2 second argument of the event
+        * @return int returns if the event was handled
+        */
+        int eventDistributor(int type, int par1, int par2);
+
     private:
 
         static EventHandler *eventHandlerStatic;
@@ -43,26 +53,6 @@ class EventHandler {
         * @return void
         */
         void startNewGame();
-        
-        /**
-        * Functions needed to call C function, redirects to real function
-        * 
-        * @param type event type
-        * @param par1 first argument of the event
-        * @param par2 second argument of the event
-        * @return int returns if the event was handled
-        */
-        static int eventDistributorStatic(int type, int par1, int par2);
-
-        /**
-        * Handles events and redirects them
-        * 
-        * @param type event type
-        * @param par1 first argument of the event
-        * @param par2 second argument of the event
-        * @return int returns if the event was handled
-        */
-        int eventDistributor(int type, int par1, int par2);
 
         /**
         * Handles pointer Events

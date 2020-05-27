@@ -19,7 +19,6 @@ EventHandler::EventHandler()
 
         //Sets eventDistributor as global EventHandler
         eventHandlerStatic = this;
-        SetEventHandler(EventHandler::eventDistributorStatic);
 
         //Start new Content
         startNewGame();
@@ -30,7 +29,6 @@ EventHandler::~EventHandler()
 {
         delete game;
         delete menu;
-        delete eventHandlerStatic;
 }
 
 
@@ -55,11 +53,6 @@ void EventHandler::startNewGame()
 
     FullUpdate();
 
-}
-
-int EventHandler::eventDistributorStatic(int type, int par1, int par2)
-{
-    return eventHandlerStatic->eventDistributor(type,par1,par2);
 }
 
 int EventHandler::eventDistributor(int type, int par1, int par2)
