@@ -7,8 +7,7 @@ A simple TikTakToe Applikation for Pocketbook, I created to start learning C++ a
 * Pocketbook HD3 (PB623) (V. U623.6.0.926)
 
 ## Screenshots
-![Screenshot 1](/screenshots/1.bmp#raw "Pocketbook Screenshot")
-
+<img src="/screenshots/1.bmp" width="50%" height="50%">
 
 ### Usage
 Download and unzip the file from releases and place the nextcloud.app into the "applications" folder of your pocketbook. Once you disconnect the Pocketbook from the PC, the application should be visibile.
